@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Skincare Recommender</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #fce4ec, #f8bbd0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      max-width: 650px;
+      width: 100%;
+    }
+    h1 {
+      color: #d63384;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    h2 {
+      font-size: 16px;
+      margin: 20px 0 10px;
+    }
+    input[type="radio"] {
+      margin-right: 10px;
+    }
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      background-color: #d63384;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background-color: #b82e6f;
+    }
+    .result-card {
+      background: #fff0f6;
+      border-radius: 15px;
+      padding: 20px;
+      margin-top: 30px;
+      text-align: center;
+    }
+    .result-card img {
+      max-width: 100%;
+      border-radius: 10px;
+      margin: 15px 0;
+    }
+    .footer {
+      text-align: center;
+      font-size: 12px;
+      color: #777;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Find Your Skincare Match 🌸</h1>
+    <form id="quiz">
+      <h2>1. How does your skin feel after washing?</h2>
+      <label><input type="radio" name="q1" value="dry">Tight & dry</label><br>
+      <label><input type="radio" name="q1" value="normal">Balanced / Normal</label><br>
+      <label><input type="radio" name="q1" value="oily">Oily or greasy</label><br>
+      <label><input type="radio" name="q1" value="sensitive">Red or itchy</label>
+      <h2>2. What’s your biggest skin concern?</h2>
+      <label><input type="radio" name="q2" value="acne">Acne or pimples</label><br>
+      <label><input type="radio" name="q2" value="dull">Dullness / dark spots</label><br>
+      <label><input type="radio" name="q2" value="redness">Redness or irritation</label><br>
+      <label><input type="radio" name="q2" value="none">No major concern</label>
+      <h2>3. How often do you exfoliate?</h2>
+      <label><input type="radio" name="q3" value="weekly">Once a week</label><br>
+      <label><input type="radio" name="q3" value="rarely">Rarely</label><br>
+      <label><input type="radio" name="q3" value="daily">Daily</label>
+      <h2>4. Do you use sunscreen regularly?</h2>
+      <label><input type="radio" name="q4" value="yes">Yes</label><br>
+      <label><input type="radio" name="q4" value="no">No</label>
+      <h2>5. What type of environment do you spend most time in?</h2>
+      <label><input type="radio" name="q5" value="indoor">Indoors (AC rooms, home)</label><br>
+      <label><input type="radio" name="q5" value="outdoor">Outdoors (sunlight/pollution)</label><br>
+      <label><input type="radio" name="q5" value="mixed">Both equally</label>
+      <h2>6. How much water do you drink daily?</h2>
+      <label><input type="radio" name="q6" value="less">Less than 1L</label><br>
+      <label><input type="radio" name="q6" value="moderate">1–2 L</label><br>
+      <label><input type="radio" name="q6" value="enough">More than 2 L</label>
+      <button type="button" onclick="getResult()">Get Recommendation</button>
+    </form>
+    <div id="result"></div>
+    
+    <!-- Self-care Quote -->
+    <p style="font-style: italic; margin-top: 20px; text-align: center;">"When you feel good, you perform even better"</p>
+    
+    <div class="footer">© Skincare Recommender</div>
+  </div>
+
+  <script>
+    
+  function getResult(){
+    const q1 = document.querySelector('input[name="q1"]:checked');
+    const q2 = document.querySelector('input[name="q2"]:checked');
+    const q3 = document.querySelector('input[name="q3"]:checked');
+    const q4 = document.querySelector('input[name="q4"]:checked');
+    const q5 = document.querySelector('input[name="q5"]:checked');
+    const q6 = document.querySelector('input[name="q6"]:checked');
+    if(!q1||!q2||!q3||!q4||!q5||!q6){ return alert('Please answer all questions!'); }
+
+    let products = [], food = '';
+
+    if(q1.value === 'dry'){
+      products = [{
+        name:"Cetaphil Moisturizing Cream",
+        description:"Rich moisturiser for dry skin.",
+        image:"https://i5.walmartimages.com/asr/dca2c14f-ded7-40ed-bf3c-927a6c774b2f.5772d8ce546227834f1732f3b17a49bd.jpeg"
+      },
+    {
+        name:"Plum Oat & Ceramide Face Wash",
+        description:"Calming irritation and strengthening the skin barrier without causing dryness.",
+        image:"https://tse1.mm.bing.net/th/id/OIP.sccoSIqE_3HXbYGMz5RuRAHaHa?pid=Api&P=0&h=180"
+      },
+    {
+        name:"foxtale sunscreen",
+        description:"It shields your skin from UVA/UVB rays while keeping it hydrated throughout the day.",
+        image:"https://tse3.mm.bing.net/th/id/OIP.qIq8HZsb62vq3ppv8cqOBgHaHa?pid=Api&P=0&h=180"
+      }];
+      food = "Include avocados, almonds, olive oil in your diet & drink more water.";
+    } else if(q1.value === 'oily'){
+      products = [{
+        name:"Neutrogena Hydro Boost Water Gel",
+        description:"Lightweight gel great for oily skin.",
+        image:"https://sp.yimg.com/ib/th/id/OIP.ak8uprpjhQ84fKGZGkiIxwHaHa?pid=Api&w=148&h=148&c=7&dpr=2&rs=1"
+      },
+      {
+          name:" CeraVe Foaming Facial Cleanser ",
+          description:"Removes dirt, oil, and makeup without disrupting the skin’s natural barrier.",
+          image:"https://tse1.mm.bing.net/th/id/OIP.kSA_f1JJWubYiC84Yzo5KQHaJ4?pid=Api&P=0&h=180"
+        },
+        {
+          name:"Plum rice water niacinamide serum",
+          description:"It helps fade dark spots, reduce acne marks, and control excess oil.",
+          image:"https://cdn2.arogga.com/eyJidWNrZXQiOiJhcm9nZ2EiLCJrZXkiOiJQcm9kdWN0LXBfaW1hZ2VzXC82MjE0NFwvNjIxNDQtcTJyaTg1eWMyZ2lmZmVhZGdzYW4tZGd1MmxkLndlYnAiLCJlZGl0cyI6W119"
+        }
+         ];
+      food = "Eat fiber‑rich foods & drink more water; avoid excess grease.";
+    } else if(q1.value === 'sensitive'){
+      products = [
+        {
+          name:"La Roche‑Posay Toleriane Double Repair Moisturizer",
+          description:"Soothing formula for sensitive skin.",
+          image:"https://tse1.mm.bing.net/th/id/OIP.qp5GExsWirfIjSnfRWRfSQHaHa?pid=Api&P=0&h=180"
+        },
+        {
+          name:"Plum Hello Aloe Skin Loving Face Wash",
+          description:"Soothes irritation and calms sensitive or sun-exposed skin.",
+          image:"https://tse3.mm.bing.net/th/id/OIP.UoEQrV4n5OBzaSB1M0eVvAHaHa?pid=Api&P=0&h=180"
+        },
+        {
+          name:" Dr. Sheth’s Centella & Niacinamide Serum ",
+          description:"A lightweight, calming serum with 10% Niacinamide and Centella that reduces redness, fades acne marks and balances oil—perfect for sensitive and acne-prone skin.",
+          image:"https://tse4.mm.bing.net/th/id/OIP.N108m1wj2Y3aJxQ0_KMTygAAAA?pid=Api&P=0&h=180"
+        }
+      ];
+      food = "Choose anti-inflammatory foods like cucumber & chamomile, green leafy vegetables, and probiotic-rich foods.";
+    } else {
+      products = [{
+        name:"Bioderma Sensibio Light Soothing Cream",
+        description:"Well‑rounded moisturizer for all skin types.",
+        image:"https://tse1.mm.bing.net/th/id/OIP.ufcAzv97YH-J_dLCAQhdHwHaHa?pid=Api&P=0&h=180"
+      },
+      {
+          name:"The Face Shop Rice Water Bright Foaming Cleanser",
+          description:"Ideal for normal to combination skin types.",
+          image:"https://tse2.mm.bing.net/th/id/OIP.EmEf6qhex-XO0r3cKrQuJAHaHa?pid=Api&P=0&h=180"
+        }
+    ];
+      food = "Keep a balanced diet with fruits, greens & water.";
+    }
+
+    let addOn = '';
+    if(q2.value === 'acne') addOn = "Consider Niacinamide or Salicylic Acid serum.";
+    else if(q2.value === 'dull') addOn = "Try a Vitamin C serum for brightness.";
+    else if(q2.value === 'redness') addOn = "Look for Aloe, Green Tea or Centella products.";
+
+    let html = `<div class="result-card">`;
+    products.forEach(p => {
+      html += `
+        <h3>${p.name}</h3>
+        <img src="${p.image}" alt="${p.name}">
+        <p>${p.description}</p>
+        <hr style="border: 0.5px solid #eee;">
+      `;
+    });
+    html += `<p><strong>${addOn}</strong></p>
+             <p><strong>Food Tip:</strong> ${food}</p>
+             </div>`;
+
+    document.getElementById('result').innerHTML = html;
+  }
+</script>
+
+</body>
+</html>
